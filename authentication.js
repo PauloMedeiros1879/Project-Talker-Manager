@@ -5,10 +5,12 @@ const isAuthEmail = (req, res, next) => {
   const authEmailInputRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const authEmail = authEmailInputRegex.test(email);
 
-  if (!email || email === '') { return res.status(400).json({ message: 'O campo email é obrigatório' });
+  if (!email || email === '') { 
+    return res.status(400).json({ message: 'O campo email é obrigatório' });
   }
 
-  if (!authEmail) { return res.status(400).json({ message: 'O email deve ter o formato email@email.com' });
+  if (!authEmail) { 
+    return res.status(400).json({ message: 'O email deve ter o formato email@email.com' });
   }  
 
   next();

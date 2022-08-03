@@ -5,8 +5,8 @@ const talk = require('./fs');
 
 const {
   isAuthEmail,
-  isAuthPassword
-} = require('./authentication')
+  isAuthPassword,
+} = require('./authentication');
 
 const app = express();
 app.use(bodyParser.json());
