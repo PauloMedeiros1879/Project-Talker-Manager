@@ -1,6 +1,7 @@
-const talker = require('./talker.json');
 const express = require('express');
 const bodyParser = require('body-parser');
+const rescue = require('express-rescue'); // É um wrapper que ajuda os middlewares assíncronos
+const talk = require('./fs');
 
 const app = express();
 app.use(bodyParser.json());
@@ -17,6 +18,8 @@ app.listen(PORT, () => {
   console.log('Online');
 });
 
-app.get('/talker', function (req, res) {
-  res.status(200).json(talker)
-});
+// Requisito 01 - Criando um endpoint GET /talker
+app.get('/talker', rescue(async (req, res) => {
+  const talker = await talk.getTalk();
+  res.status(200).json(talker);
+}));
