@@ -3,6 +3,11 @@ const bodyParser = require('body-parser');
 const rescue = require('express-rescue'); // É um wrapper que ajuda os middlewares assíncronos
 const talk = require('./fs');
 
+const {
+  isAuthEmail,
+  isAuthPassword
+} = require('./authentication')
+
 const app = express();
 app.use(bodyParser.json());
 
@@ -34,3 +39,8 @@ app.get('/talker/:id', rescue(async (req, res) => {
 
   res.status(200).json(talkerFindId);
 }));
+
+// Requisito 03 - Criando o endpoint POST /login
+app.post('/login', isAuthEmail, isAuthPassword, (_req, res) => {
+  res.status(200).json({ token: '7mqaVRXJSp886CGr' });
+});
