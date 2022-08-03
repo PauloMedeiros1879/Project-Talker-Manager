@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const rescue = require('express-rescue'); // É um wrapper que ajuda os middlewares assíncronos
+const crypto = require('crypto');
 const talk = require('./fs');
 
 const {
@@ -41,6 +42,8 @@ app.get('/talker/:id', rescue(async (req, res) => {
 }));
 
 // Requisito 03 - Criando o endpoint POST /login
-app.post('/login', isAuthEmail, isAuthPassword, (_req, res) => {
-  res.status(200).json({ token: '7mqaVRXJSp886CGr' });
+app.post('/login', isAuthEmail, isAuthPassword, (req, res) => {
+  const token = crypto.randomBytes(8).toString('hex');
+  req.token = token;
+  res.status(200).json({ token });
 });
