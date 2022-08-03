@@ -23,3 +23,14 @@ app.get('/talker', rescue(async (req, res) => {
   const talker = await talk.getTalk();
   res.status(200).json(talker);
 }));
+
+// Requisito 02 - Criando o endpoint GET /talker/:id
+app.get('/talker/:id', rescue(async (req, res) => {
+  const { id } = req.params;
+  const talker = await talk.getTalk();
+  const talkerFindId = talker.find((e) => e.id === parseInt(id, 10));
+
+  if (!talkerFindId) return res.status(404).json({ message: 'Pessoa palestrante não encontrada' }); 
+
+  res.status(200).json(talkerFindId);
+}));
