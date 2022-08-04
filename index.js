@@ -132,4 +132,3 @@ app.delete('/talker/:id', isAuthToken, rescue(async (req, res) => {
   await talk.setTalk(talkToDelete);
   res.status(204).json(talkToDelete);
 }));
-
