@@ -117,7 +117,7 @@ app.put(
 app.delete('/talker/:id', isAuthToken, rescue(async (req, res) => {
   const { id } = req.params;
   const talker = await talk.getTalk();
-  const talkToDelete = talker.findIndex((e) => e.id !== talker.length - 1);
+  const talkToDelete = talker.filter((e) => e.id !== parseInt(id, 10));
 
   await talk.setTalk(talkToDelete);
   res.status(204).json(talkToDelete);
