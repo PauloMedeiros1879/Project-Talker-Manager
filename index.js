@@ -30,14 +30,14 @@ app.listen(PORT, () => {
   console.log('Online');
 });
 
-// Requisito 01 - Criando um endpoint GET /talker
+// Requisito 01 - Criando um endpoint GET /talker (Retorna uma pessoa palestrante)
 app.get('/talker', rescue(async (req, res) => {
   const talker = await talk.getTalk();
 
   res.status(200).json(talker);
 }));
 
-// Requisito 02 - Criando o endpoint GET /talker/:id
+// Requisito 02 - Criando o endpoint GET /talker/:id (Retorna uma pessoa palestrante)
 app.get('/talker/:id', rescue(async (req, res) => {
   const { id } = req.params;
   const talker = await talk.getTalk();
@@ -55,7 +55,7 @@ app.post('/login', isAuthEmail, isAuthPassword, (req, res) => {
   res.status(200).json({ token });
 });
 
-// Requisito 05 - Criando o endpoint POST /talker
+// Requisito 05 - Criando o endpoint POST /talker (Adiciona uma pessoa palestrante)
 app.post(
   '/talker',
   isAuthToken,
@@ -83,7 +83,7 @@ app.post(
   }),
 );
 
-// Requisito 6 - Crie o endpoint PUT /talker/:id
+// Requisito 6 - Crie o endpoint PUT /talker/:id (Editar uma pessoa palestrante)
 app.put(
   '/talker/:id',
   isAuthToken,
@@ -112,3 +112,13 @@ app.put(
     res.status(200).json(talkUpdate);
   }),
 );
+
+// Requisito 7 - Crie o endpoint DELETE /talker/:id (Deletar uma pessoa palestrante)
+app.delete('/talker/:id', isAuthToken, rescue(async (req, res) => {
+  const { id } = req.params;
+  const talker = await talk.getTalk();
+  const talkToDelete = talker.findIndex((e) => e.id !== talker.length - 1);
+
+  await talk.setTalk(talkToDelete);
+  res.status(204).json(talkToDelete);
+}));
