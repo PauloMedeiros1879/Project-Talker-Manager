@@ -82,3 +82,33 @@ app.post(
     res.status(201).json(newTalker);
   }),
 );
+
+// Requisito 6 - Crie o endpoint PUT /talker/:id
+app.put(
+  '/talker/:id',
+  isAuthToken,
+  isAuthName,
+  isAuthAge,
+  isAuthTalk,
+  isAuthRate,
+  isAuthWatched,
+  rescue(async (req, res) => {
+    const { name, age, talk: { watchedAt, rate } } = req.body;
+    const { id } = req.params;
+    const talker = await talk.getTalk();
+    const talkToUpdate = talker.findIndex((e) => e.id === parseInt(id, 10));
+    const talkUpdate = {
+      id: parseInt(id, 10),
+      name,
+      age,
+      talk: {
+        watchedAt,
+        rate,
+      },
+    };
+    const newTalkers = [...talker];
+    newTalkers[talkToUpdate] = talkUpdate;
+    await talk.setTalk(newTalkers);
+    res.status(200).json(talkUpdate);
+  }),
+);

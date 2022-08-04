@@ -27,7 +27,7 @@ const isAuthPassword = (req, res, next) => {
   next();
 };
 
-// Requisito 5 - 
+// Requisito 5
 const isAuthToken = (req, res, next) => {
   const token = req.headers.authorization;
   if (!token || token === '') {
