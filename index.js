@@ -30,6 +30,16 @@ app.listen(PORT, () => {
   console.log('Online');
 });
 
+// Requisito 8 - Crie o endpoint GET /talker/search?q=searchTerm
+app.get('/talker/search', isAuthToken, rescue(async (req, res) => {
+  const searchTerm = req.query.q;
+  const talker = await talk.getTalk();
+  if (!searchTerm || searchTerm === '') return res.status(200).json(talker);
+    
+  const talkFilter = talker.filter((e) => e.name.includes(searchTerm));
+  res.status(200).json(talkFilter);
+}));
+
 // Requisito 01 - Criando um endpoint GET /talker (Retorna uma pessoa palestrante)
 app.get('/talker', rescue(async (req, res) => {
   const talker = await talk.getTalk();
@@ -122,3 +132,4 @@ app.delete('/talker/:id', isAuthToken, rescue(async (req, res) => {
   await talk.setTalk(talkToDelete);
   res.status(204).json(talkToDelete);
 }));
+
