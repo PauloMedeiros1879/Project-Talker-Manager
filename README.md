@@ -1,10 +1,13 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+# Talker Manager
+###### by _[Paulo Medeiros](https://www.linkedin.com/in/paulo-medeiros-dev1879/)_
+
+## :man_technologist: Habilidades desenvolvidas
+
+Nesse projeto tive que desenvolver uma API de cadastro de palestrantes com o NodeJS e Express, que é possível manipular informações de palestrantes através do CRUD e aplicações de middlewares, utilizando o módulo fs.
+
+## ⚙️ Como Executar
+Clone o repositório em uma pasta de preferência
+
+```
+git@github.com:PauloMedeiros1879/Project-Talker-Manager.git
+```
